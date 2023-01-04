@@ -1,0 +1,48 @@
+{
+  "go.useLanguageServer": true,
+  "gopls": {
+    "experimentalWorkspaceModule": true,
+  },
+  "go.lintTool":"golangci-lint",
+  "go.lintFlags": [
+    "--fast"
+  ],
+  "go.lintOnSave": "package",
+  "go.formatTool": "goimports",
+  "[go]": {
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": true
+    },
+    "editor.formatOnSave": true,
+    "editor.rulers": [
+      100
+    ]
+  },
+  "go.docsTool": "gogetdoc",
+  "cSpell.words": [
+    "boints",
+    "Debugf",
+    "emptypb",
+    "gocql",
+    "godotenv",
+    "Infof",
+    "joho",
+    "Keyspace",
+    "keyspaces",
+    "nats",
+    "protobuf",
+    "protoimpl",
+    "smallint",
+    "sqlx",
+    "Warningf"
+  ],
+  "protoc": {
+    "compile_on_save": false,
+    "options": [
+      "--proto_path=protos/v3",
+      "--proto_path=protos/v2",
+      "--proto_path=${workspaceRoot}/proto",
+      "--proto_path=${env.GOPATH}/src"
+    ]
+  }
+}

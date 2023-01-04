@@ -1,0 +1,126 @@
+linters-settings:
+  errcheck:
+    check-type-assertions: false
+  goconst:
+    min-len: 2
+    min-occurrences: 3
+  gocritic:
+    enabled-tags:
+      - diagnostic
+      - experimental
+      - opinionated
+      - performance
+      - style
+  govet:
+    # Report about shadowed variables.
+    # Default: false
+    check-shadowing: true
+  nolintlint:
+    # Enable to require an explanation of nonzero length after each nolint directive.
+    # Default: false
+    require-explanation: true
+    # Enable to require nolint directives to mention the specific linter being suppressed.
+    # Default: false
+    require-specific: true
+  gosimple:
+    go: "1.19"
+    checks: ["all"]
+  funlen:
+    # Checks the number of lines in a function.
+    # If lower than 0, disable the check.
+    # Default: 60
+    lines: 120
+    # Checks the number of statements in a function.
+    # If lower than 0, disable the check.
+    # Default: 40
+    statements: 50
+  gocognit:
+    # Minimal code complexity to report
+    # Default: 30 (but we recommend 10-20)
+    min-complexity: 20
+  gocyclo:
+    min-complexity: 20
+  interfacebloat:
+    max: 10
+  lll:
+    # Max line length, lines longer will be reported.
+    # '\t' is counted as 1 character by default, and can be changed with the tab-width option.
+    # Default: 120.
+    line-length: 100
+    # Tab width in spaces.
+    # Default: 1
+    tab-width: 1
+
+linters:
+  disable-all: true
+  enable:
+    - bodyclose
+    - depguard
+    - dogsled
+    - errcheck
+    - exportloopref
+    # - dupl
+    # - exhaustive #Check missing cases in switch
+    - goconst
+    - gocritic
+    - gofmt
+    - goimports
+    - gomnd
+    - gocyclo
+    - gosec
+    - gosimple
+    - govet
+    - ineffassign
+    - misspell
+    - nolintlint
+    - nakedret
+    - prealloc
+    - predeclared
+    - revive
+    - staticcheck
+    - stylecheck
+    - thelper
+    - tparallel
+    - typecheck
+    - unconvert
+    - unparam
+    - whitespace
+    - wsl
+    - funlen
+    - lll
+    - makezero
+
+run:
+  go: "1.19"
+  skip-dirs:
+    - e2e
+    - proto
+    - pkg
+  tests: false
+
+output:
+  print-linter-name: true
+
+issues:
+  exclude-rules:
+    - text: 'shadow: declaration of "(err|ctx)" shadows declaration at'
+      linters:
+        - govet
+    - text: "var-naming: don't use ALL_CAPS in Go names; use CamelCase"
+      linters:
+        - govet
+        - revive
+    - text: "should not use ALL_CAPS in Go names; use CamelCase instead"
+      linters:
+        - stylecheck
+    - text: "var-naming: don't use ALL_CAPS in Go names; use CamelCase"
+      linters:
+        - govet
+        - revive
+    - text: "don't use an underscore in package name"
+      linters:
+        - revive
+        - stylecheck
+    - text: "should not use underscores in package names"
+      linters:
+        - stylecheck

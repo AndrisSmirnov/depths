@@ -1,0 +1,3 @@
+# Temp build folder
+tmp/
+microservices/*/tmp/

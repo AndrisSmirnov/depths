@@ -1,0 +1,22 @@
+FROM golang:1.19.1 as build-stage
+WORKDIR /usr/src/app
+
+COPY ./microservices/auth ./microservices/auth
+COPY ./proto-generate.sh .
+
+RUN sh proto-generate.sh
+
+WORKDIR /usr/src/app/microservices/auth
+
+RUN go get
+RUN GOOS=linux CGO_ENABLED=0 GOARCH=amd64 go build -ldflags="-w -s" -o auth .
+
+FROM alpine:3.16 AS production-stage
+
+WORKDIR /usr/src/app
+
+COPY --from=build-stage /usr/src/app/microservices/auth .
+
+EXPOSE 8080/tcp
+
+CMD [ "./auth" ]
