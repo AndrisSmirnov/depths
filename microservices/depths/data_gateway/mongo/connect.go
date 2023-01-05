@@ -8,7 +8,7 @@ import (
 
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
-	_ "go.mongodb.org/mongo-driver/mongo/readpref"
+	_ "go.mongodb.org/mongo-driver/mongo/readpref" // justifying it
 )
 
 func CreateMongoConn(ctx context.Context, conf *Config, errChan chan error) (*DB, error) {

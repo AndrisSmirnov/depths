@@ -1,6 +1,9 @@
 package app
 
-import "context"
+import (
+	"context"
+	"depths/app/domain/exchange_manager_domain"
+)
 
 func CreateApplication(ctx context.Context, cancelFunc func()) (*App, error) {
 	const ERROR_AMOUNT = 5
@@ -12,8 +15,20 @@ func CreateApplication(ctx context.Context, cancelFunc func()) (*App, error) {
 		return nil, err
 	}
 
+	exchangeManager, err := exchange_manager_domain.NewExchangeManager(dataGateway)
+	if err != nil {
+		return nil, err
+	}
+
+	services, err := CreateServices(exchangeManager)
+	if err != nil {
+		return nil, err
+	}
+
 	return &App{
-		dataGateway: dataGateway,
-		cancelFunc:  cancelFunc,
+		dataGateway:  dataGateway,
+		depthManager: exchangeManager,
+		services:     services,
+		cancelFunc:   cancelFunc,
 	}, nil
 }

@@ -3,11 +3,15 @@ package app
 import (
 	"depths/app/domain/market_precision_domain"
 	"encoding/json"
-	"io/ioutil"
+	"os"
 )
 
 func (a *App) Launch() error {
-	return a.InitMarketPrecisions()
+	if err := a.InitMarketPrecisions(); err != nil {
+		return err
+	}
+
+	return a.depthManager.Start()
 }
 
 func (a *App) InitMarketPrecisions() error {
@@ -22,7 +26,8 @@ func (a *App) InitMarketPrecisions() error {
 //goland:noinspection GoDeprecation
 func readFromFileMarketPrecisions() ([]market_precision_domain.MarketPrecision, error) {
 	var data []market_precision_domain.MarketPrecision
-	file, err := ioutil.ReadFile("marketprecisions.json")
+
+	file, err := os.ReadFile("marketprecisions.json")
 	if err != nil {
 		return nil, err
 	}

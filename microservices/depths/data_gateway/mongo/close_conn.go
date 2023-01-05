@@ -2,6 +2,7 @@ package mongo
 
 import (
 	"depths/pkg/log"
+
 	"go.mongodb.org/mongo-driver/mongo/readpref"
 )
 

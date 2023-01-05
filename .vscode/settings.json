@@ -1,7 +1,7 @@
 {
   "go.useLanguageServer": true,
   "gopls": {
-    "experimentalWorkspaceModule": true,
+    "experimentalWorkspaceModule": true
   },
   "go.lintTool":"golangci-lint",
   "go.lintFlags": [

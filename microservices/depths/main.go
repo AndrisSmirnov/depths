@@ -2,6 +2,8 @@ package main
 
 import (
 	"context"
+	"depths/voc"
+	"fmt"
 	"os"
 	"os/signal"
 	"strconv"
@@ -34,7 +36,13 @@ func main() {
 
 	log.Info("Depths microservice stopping...")
 
-	application.Stop()
+	if err := application.Stop(); err != nil {
+		log.Warning(
+			fmt.Sprintf("%s:%v",
+				voc.ErrorApplicationStop,
+				err,
+			))
+	}
 
 	log.Info("Depths microservice stopped.")
 }

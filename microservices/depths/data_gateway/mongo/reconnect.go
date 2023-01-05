@@ -3,10 +3,11 @@ package mongo
 import (
 	"depths/pkg/log"
 	"fmt"
-	"go.mongodb.org/mongo-driver/mongo/readpref"
 	"os"
 	"strconv"
 	"time"
+
+	"go.mongodb.org/mongo-driver/mongo/readpref"
 )
 
 func (m *DB) startHealthCheck() error {
